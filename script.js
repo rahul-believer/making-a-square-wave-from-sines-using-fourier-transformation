@@ -5,15 +5,27 @@ let circles;
 
 
 function setup() {
-  createCanvas(1900, 1000);
-  circles = createSlider(1, 5, 1);
+  createCanvas(1800, 950);
+  circles = createSlider(1, 100, 3);
+
+  timer2  = createSlider(1, 5, 3);
+
 }
 
 function draw() {
-  background(0);
+  background(150);
   textSize(32);
+  fill(0)
+  stroke(0);
   text('circles', 10, 910);
-  circles.position(130, 900);
+  text('speed', 10, 450);
+  textSize(22);
+  text('0', 125, 910);
+  text('100', 1750, 910);
+
+  circles.position(150, 900);
+  circles.style('width', '1600px');
+  timer2.position(130, 440);
 
   translate(350, 200);
 
@@ -30,29 +42,31 @@ function draw() {
     x += radius * cos(n * time);
     y += radius * sin(n * time);
 
-    stroke(255, 100);
+    stroke(color(0, 0, 255));
     noFill();
     ellipse(prevx, prevy, radius * 2);
 
-    fill(255);
-    stroke(255);
+    fill(255,0,153);
+    stroke(255  );
     line(prevx, prevy, x, y);
-    ellipse(x, y, 8);
+    ellipse(x, y, 10);
   }
   wave.unshift(y);
-
+  stroke(255,0,153);
   translate(200, 0);
   line(x - 200, y, 0, wave[0]);
   beginShape();
   noFill();
   for (let i = 0; i < wave.length; i++) {
+    stroke(255,0,153);
     vertex(i, wave[i]);
+
   }
   endShape();
 
-  time += 0.05;
+  time += 0.01 * timer2.value();
 
-  if (wave.length > 750) {
+  if (wave.length > 1150) {
     wave.pop();
   }
 }
