@@ -1,20 +1,27 @@
 let time = 0;
 let wave = [];
 
+let circles;
 
 
 function setup() {
-  createCanvas(1400, 500);
+  createCanvas(1900, 1000);
+  circles = createSlider(1, 5, 1);
 }
 
 function draw() {
   background(0);
+  textSize(32);
+  text('circles', 10, 910);
+  circles.position(130, 900);
+
   translate(350, 200);
+
 
   let x = 0;
   let y = 0;
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < circles.value(); i++) {
     let prevx = x;
     let prevy = y;
 
@@ -48,5 +55,4 @@ function draw() {
   if (wave.length > 750) {
     wave.pop();
   }
-  
 }
